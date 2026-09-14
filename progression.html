@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ketel · Accueil</title>
+<title>Ketel · Progression</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
@@ -13,24 +13,15 @@
 
   <div class="top">
     <div class="brand"><span class="mark" id="brandMark"></span><span>Ketel</span></div>
-    <h1>Entraîne-toi, progresse, rééduque.</h1>
-    <p>Programmes de force, d'endurance, de perte de poids et de rééducation — adaptés à toi en 2 minutes.</p>
+    <h1 style="font-size:22px;">Progression</h1>
     <div class="stat-row" id="statRow"></div>
   </div>
 
-  <div id="sessionBanner"></div>
-  <div id="quizCta"></div>
+  <div class="sec-title">7 derniers jours</div>
+  <div id="sparkWrap"></div>
 
-  <div class="sec-title">Programmes recommandés</div>
-  <div id="progPreview"></div>
-  <a href="programmes.html" class="btn btn-ghost" style="margin-bottom:22px;">Voir tous les programmes</a>
-
-  <div class="sec-title">Outils</div>
-  <div class="btn-row" style="margin-bottom:10px;">
-    <a href="calculateurs.html" class="btn">Calculateurs</a>
-    <a href="progression.html" class="btn">Progression</a>
-  </div>
-  <a href="questionnaire.html" class="btn btn-ghost">Refaire le questionnaire</a>
+  <div class="sec-title">Historique</div>
+  <div id="histList"></div>
 
 </div>
 
@@ -41,6 +32,6 @@
 <script src="js/store.js"></script>
 <script src="js/util.js"></script>
 <script src="js/nav.js"></script>
-<script src="js/dashboard.js"></script>
+<script src="js/progression.js"></script>
 </body>
 </html>

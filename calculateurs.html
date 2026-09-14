@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ketel · Calculateurs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <div class="brand"><span class="mark" id="brandMark"></span><span>Ketel</span></div>
+    <h1 style="font-size:22px;">Calculateurs</h1>
+    <p>IMC, besoins en protéines et en calories — à partir de ton profil.</p>
+  </div>
+
+  <details open>
+    <summary>Ton profil</summary>
+    <div class="acc-body">
+      <div class="bell-controls" id="genderControls"></div>
+      <label for="weightIn">Poids (kg)</label>
+      <input type="number" id="weightIn" min="30" max="250" placeholder="70">
+      <label for="heightIn">Taille (cm)</label>
+      <input type="number" id="heightIn" min="120" max="230" placeholder="175">
+      <label for="ageIn">Âge</label>
+      <input type="number" id="ageIn" min="12" max="100" placeholder="30">
+      <label for="activityIn">Niveau d'activité</label>
+      <select id="activityIn">
+        <option value="sedentaire">Sédentaire — peu ou pas d'exercice</option>
+        <option value="leger">Légèrement actif — 1-3× / sem</option>
+        <option value="modere">Modérément actif — 3-5× / sem</option>
+        <option value="actif">Très actif — 6-7× / sem</option>
+        <option value="tresActif">Extrêmement actif — physique + sport</option>
+      </select>
+      <label for="goalIn">Objectif</label>
+      <select id="goalIn">
+        <option value="perte">Perte de poids</option>
+        <option value="maintien">Maintien</option>
+        <option value="muscle">Prise de muscle</option>
+        <option value="endurance">Endurance</option>
+      </select>
+    </div>
+  </details>
+
+  <div class="sec-title">IMC</div>
+  <div id="imcResult"></div>
+
+  <div class="sec-title">Protéines</div>
+  <div id="proteinResult"></div>
+
+  <div class="sec-title">Besoins caloriques</div>
+  <div id="calResult"></div>
+
+</div>
+
+<nav class="bottom-nav" id="bottomNav"></nav>
+
+<script src="js/icons.js"></script>
+<script src="data/programs.js"></script>
+<script src="js/store.js"></script>
+<script src="js/util.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/calculators.js"></script>
+</body>
+</html>
