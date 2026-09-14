@@ -79,8 +79,10 @@ const EXERCISE_PHOTOS = {
   "Bascule du bassin": "Pelvic_Tilt_Into_Bridge",
   "Rack Carry March": "Farmers_Walk",
   "Plank Jacks": "Plank",
-  "Chaise murale": "Bodyweight_Squat",
-  "Rétraction scapulaire": "Scapular_Pull-Up",
+  "Lying Single-Arm Press": "One-Arm_Kettlebell_Floor_Press",
+  // Chaise murale et Rétraction scapulaire gardent leur pictogramme dessiné :
+  // les seules photos trouvées (squat debout, traction suspendue) montrent
+  // une position trop différente pour rester fidèles au mouvement.
   // Salle de sport
   "Développé couché": "Barbell_Bench_Press_-_Medium_Grip",
   "Développé incliné haltères": "Incline_Dumbbell_Press",
@@ -115,8 +117,15 @@ function exercisePhotoUrl(name, frame){
 // Best available visual for an exercise: real photo > drawn pose > generic pattern icon.
 function exerciseMediaHtml(name, pattern, color){
   const url = exercisePhotoUrl(name, 0);
-  if(url) return `<img src="${url}" alt="${name.replace(/"/g,'')}" loading="lazy">`;
-  return exerciseFigureSvg(name, color) || patternIcon(pattern, color);
+  const fallback = exerciseFigureSvg(name, color) || patternIcon(pattern, color);
+  if(url){
+    // If the photo fails to load (network hiccup, moved file), swap to the
+    // drawn pictogram instead of leaving a broken image icon.
+    const safeFallback = fallback.replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/"/g,'&quot;');
+    const alt = name.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
+    return `<img src="${url}" alt="${alt}" loading="lazy" onerror="this.outerHTML='${safeFallback}'">`;
+  }
+  return fallback;
 }
 
 const POSES = {

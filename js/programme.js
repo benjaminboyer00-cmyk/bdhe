@@ -56,18 +56,23 @@
     renderGender(); updateBell();
   }
 
+  const WEIGHTED_EQUIPMENT = ['kettlebell', 'salle', 'les deux'];
+  const tracksLoad = WEIGHTED_EQUIPMENT.includes(prog.equipment);
+
   document.getElementById('sessionList').innerHTML = prog.sessions.map((session, i)=>{
     const dur = Math.round(sessionDurationSec(session)/60);
-    const exRows = session.exercises.map(ex=>`
+    const exRows = session.exercises.map(ex=>{
+      const lastWeight = (tracksLoad && ex.mode==='reps') ? getLoad(ex.name) : null;
+      return `
       <div class="ex-card">
         <div class="ex-icon${exercisePhotoUrl(ex.name)?' photo':''}">${exerciseMediaHtml(ex.name, ex.pattern, PATTERNS[ex.pattern].color)}</div>
         <div class="ex-body">
           <div class="ex-name">${ex.name}</div>
-          <div class="ex-sub">${ex.mode==='time' ? (ex.reps ? ex.reps+' · '+ex.seconds+'s' : ex.seconds+'s') : ex.reps} — repos ${ex.rest}s</div>
+          <div class="ex-sub">${ex.mode==='time' ? (ex.reps ? ex.reps+' · '+ex.seconds+'s' : ex.seconds+'s') : ex.reps} — repos ${ex.rest}s${lastWeight!=null ? ` · dernière charge ${lastWeight} kg` : ''}</div>
           ${ex.cue ? `<div class="ex-cue">${ex.cue}</div>` : ''}
         </div>
       </div>
-    `).join('');
+    `;}).join('');
     return `
       <details ${i===0?'open':''}>
         <summary>${session.name} <span style="font-weight:400;color:var(--chalk-dim);font-size:12px;">~${dur} min${session.rounds>1?' · '+session.rounds+' rounds':''}</span></summary>

@@ -10,7 +10,8 @@ function defaultStore(){
       recommendedProgramId:null, quizDone:false
     },
     history:[],
-    activeSession:null
+    activeSession:null,
+    loads:{}
   };
 }
 
@@ -57,4 +58,31 @@ function clearActiveSession(){
 }
 function getActiveSession(){
   return loadStore().activeSession;
+}
+
+function getLoad(exerciseName){
+  const store = loadStore();
+  return (store.loads && store.loads[exerciseName] != null) ? store.loads[exerciseName] : null;
+}
+function setLoad(exerciseName, kg){
+  const store = loadStore();
+  if(!store.loads) store.loads = {};
+  store.loads[exerciseName] = kg;
+  saveStore(store);
+}
+
+function resetAllData(){
+  try{ localStorage.removeItem(STORE_KEY); }catch(e){}
+}
+
+function exportData(){
+  return JSON.stringify(loadStore(), null, 2);
+}
+
+function importData(json){
+  const parsed = JSON.parse(json);
+  if(typeof parsed !== 'object' || parsed === null) throw new Error('Format invalide');
+  saveStore(Object.assign(defaultStore(), parsed, {
+    profile: Object.assign(defaultStore().profile, parsed.profile || {})
+  }));
 }

@@ -12,6 +12,8 @@
   const session = prog.sessions[sIndex];
   document.getElementById('progName').textContent = prog.title;
   document.getElementById('sessionName').textContent = session.name;
+  const WEIGHTED_EQUIPMENT = ['kettlebell', 'salle', 'les deux'];
+  const tracksLoad = WEIGHTED_EQUIPMENT.includes(prog.equipment);
 
   // Build the flat list of steps
   const steps = [];
@@ -194,6 +196,8 @@
     const cue = isWork && ex.cue ? `<div class="cue">${ex.cue}</div>` : '';
     const isPhoto = isWork && !!exercisePhotoUrl(ex.name);
     const icon = isWork ? exerciseMediaHtml(ex.name, ex.pattern, PATTERNS[ex.pattern].color) : navIcon('mark');
+    const showWeight = isWork && ex.mode==='reps' && tracksLoad;
+    const lastWeight = showWeight ? getLoad(ex.name) : null;
 
     root.innerHTML = `
       <div class="progress-bar"><i id="progFill" style="width:${Math.round((stepIndex/steps.length)*100)}%"></i></div>
@@ -206,6 +210,11 @@
         <h2>${title}</h2>
         <p>${sub}</p>
         ${cue}
+        ${showWeight ? `
+          <div class="weight-row">
+            <label for="weightInput">Charge (kg)</label>
+            <input type="number" id="weightInput" inputmode="decimal" step="0.5" min="0" placeholder="ex. 16" value="${lastWeight!=null?lastWeight:''}">
+          </div>` : ''}
       </div>
       <div class="up-next">Étape ${stepIndex+1} / ${steps.length}</div>
       <div class="runner-controls" style="margin-bottom:14px;">
@@ -220,7 +229,13 @@
     document.getElementById('btnPause').addEventListener('click', ()=> running ? pauseTimer() : startTimer());
     document.getElementById('btnAbandon').addEventListener('click', abandon);
     const doneBtn = document.getElementById('btnDone');
-    if(doneBtn) doneBtn.addEventListener('click', ()=> advance());
+    if(doneBtn) doneBtn.addEventListener('click', ()=>{
+      if(showWeight){
+        const w = parseFloat(document.getElementById('weightInput').value);
+        if(!isNaN(w) && w>=0) setLoad(ex.name, w);
+      }
+      advance();
+    });
     const skipBtn = document.getElementById('btnSkip');
     if(skipBtn) skipBtn.addEventListener('click', ()=> advance());
   }

@@ -1,13 +1,13 @@
 // Ketel — service worker: app shell cached for offline use, stale-while-revalidate.
-const CACHE = 'ketel-v3';
+const CACHE = 'ketel-v4';
 const ASSETS = [
   'index.html','programmes.html','programme.html','seance.html',
-  'questionnaire.html','calculateurs.html','progression.html',
+  'questionnaire.html','calculateurs.html','progression.html','settings.html',
   'css/style.css',
   'js/icons.js','js/figures.js','js/store.js','js/util.js','js/nav.js',
   'js/dashboard.js','js/programmes.js','js/programme.js','js/seance.js',
-  'js/quiz.js','js/calculators.js','js/progression.js',
-  'data/programs.js','manifest.json','icons/icon.svg'
+  'js/quiz.js','js/calculators.js','js/progression.js','js/settings.js',
+  'data/programs.js','manifest.json','icons/icon.svg','icons/icon-192.png','icons/icon-512.png'
 ];
 
 self.addEventListener('install', e=>{

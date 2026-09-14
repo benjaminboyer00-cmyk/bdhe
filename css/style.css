@@ -32,7 +32,7 @@
     --line:#ddd5c2;
     --chalk:#221e17;
     --chalk-dim:#726a5a;
-    --brass:#a06c1e;
+    --brass:#93631c;
     --sage:#4c6b46;
     --rust:#a1432f;
     --steel:#376073;
@@ -50,7 +50,7 @@
   --line:#ddd5c2;
   --chalk:#221e17;
   --chalk-dim:#726a5a;
-  --brass:#a06c1e;
+  --brass:#93631c;
   --sage:#4c6b46;
   --rust:#a1432f;
   --steel:#376073;
@@ -251,6 +251,8 @@ label:first-child{margin-top:0;}
 .exercise-focus h2{font-size:22px;margin:0 0 5px;letter-spacing:.002em;}
 .exercise-focus p{font-size:13.5px;color:var(--chalk-dim);margin:0;}
 .exercise-focus .cue{font-size:12px;color:var(--chalk-dim);font-style:italic;margin-top:11px;line-height:1.55;}
+.weight-row{margin-top:14px;text-align:left;max-width:160px;margin-left:auto;margin-right:auto;}
+.weight-row label{font-size:11px;margin-top:0;}
 .ex-cue{font-size:11.5px;color:var(--chalk-dim);font-style:italic;margin-top:3px;}
 .up-next{font-size:12px;color:var(--chalk-dim);text-align:center;margin-bottom:18px;}
 .up-next b{color:var(--chalk);}

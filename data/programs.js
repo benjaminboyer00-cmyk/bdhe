@@ -350,6 +350,57 @@ const PROGRAMS = [
         ]
       }
     ]
+  },
+  {
+    id:'salle-full-body',
+    title:'Musculation en Salle · Full Body',
+    category:'force',
+    equipment:'salle',
+    level:'debutant',
+    duration:'45 min',
+    freq:'3×/sem',
+    tagline:'Trois séances tout le corps, l\'entrée en salle la plus simple à suivre.',
+    description:'Trois séances complètes à alterner sur la semaine (jamais deux jours de suite) : chaque séance travaille tout le corps sur les mouvements de base. Idéal pour découvrir la salle avant de passer à un split plus poussé.',
+    color:'var(--plum)',
+    tags:['force','salle','debutant'],
+    sessions:[
+      {
+        name:'Full Body A',
+        meta:'<b>Séries classiques.</b> Charge modérée, priorité à la technique.',
+        rounds:1, restBetweenRounds:0,
+        exercises:[
+          {name:'Squat barre', pattern:'SQUAT', mode:'reps', reps:'3 × 8', rest:120, cue:'Poids sur les talons, descends jusqu\'à ce que les hanches passent sous les genoux.'},
+          {name:'Développé couché', pattern:'PUSH', mode:'reps', reps:'3 × 8', rest:120, cue:'Omoplates serrées, barre qui touche la poitrine sans rebond.'},
+          {name:'Rowing barre', pattern:'PULL', mode:'reps', reps:'3 × 10', rest:90, cue:'Dos plat, tire la barre vers le nombril.'},
+          {name:'Développé militaire', pattern:'PUSH', mode:'reps', reps:'3 × 8', rest:90, cue:'Gainage serré, pousse la barre en ligne droite au-dessus de la tête.'},
+          {name:'Gainage', pattern:'CORE', mode:'time', seconds:35, rest:45, cue:'Corps aligné, ne laisse pas les hanches tomber.'}
+        ]
+      },
+      {
+        name:'Full Body B',
+        meta:'<b>Séries classiques.</b> Charge modérée, priorité à la technique.',
+        rounds:1, restBetweenRounds:0,
+        exercises:[
+          {name:'Soulevé de terre', pattern:'HINGE', mode:'reps', reps:'3 × 8', rest:120, cue:'Dos plat, la barre reste proche des jambes tout du long.'},
+          {name:'Tirage vertical', pattern:'PULL', mode:'reps', reps:'3 × 10', rest:90, cue:'Tire la barre vers le haut de la poitrine, sans te pencher en arrière.'},
+          {name:'Développé incliné haltères', pattern:'PUSH', mode:'reps', reps:'3 × 10', rest:90, cue:'Banc à 30-45°, coudes sous les haltères.'},
+          {name:'Fentes marchées barre', pattern:'SQUAT', mode:'reps', reps:'3 × 10 / côté', rest:90, cue:'Descends droit, genou avant aligné avec la cheville.'},
+          {name:'Gainage rotation', pattern:'ROTATION', mode:'reps', reps:'3 × 14', rest:45, cue:'Rotation contrôlée du tronc, pas seulement des bras.'}
+        ]
+      },
+      {
+        name:'Full Body C',
+        meta:'<b>Séries classiques.</b> Charge modérée, priorité à la technique.',
+        rounds:1, restBetweenRounds:0,
+        exercises:[
+          {name:'Presse à cuisses', pattern:'SQUAT', mode:'reps', reps:'3 × 10', rest:120, cue:'Bas du dos plaqué au dossier, ne verrouille pas complètement les genoux.'},
+          {name:'Dips', pattern:'PUSH', mode:'reps', reps:'3 × 10', rest:90, cue:'Buste penché en avant, descends jusqu\'à un angle de coude confortable.'},
+          {name:'Rowing haltère unilatéral', pattern:'PULL', mode:'reps', reps:'3 × 10 / côté', rest:75, cue:'Dos plat, évite la rotation du tronc.'},
+          {name:'Extension quadriceps', pattern:'SQUAT', mode:'reps', reps:'3 × 12', rest:60, cue:'Mouvement contrôlé, marque une pause en haut.'},
+          {name:'Curl biceps barre', pattern:'PULL', mode:'reps', reps:'3 × 10', rest:60, cue:'Coudes fixes le long du corps, pas d\'élan.'}
+        ]
+      }
+    ]
   }
 ];
 

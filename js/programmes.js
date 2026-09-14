@@ -2,23 +2,38 @@
 (function(){
   const store = loadStore();
   const recoId = store.profile.recommendedProgramId;
-  let activeFilter = 'tous';
+  let activeCategory = 'tous';
+  let activeEquipment = 'tous';
 
-  const filters = [{key:'tous', label:'Tous'}].concat(
+  const categoryFilters = [{key:'tous', label:'Tous'}].concat(
     Object.entries(CATEGORIES).map(([key,c])=>({key, label:c.label}))
+  );
+  const equipmentValues = [...new Set(PROGRAMS.map(p=>p.equipment))];
+  const equipmentFilters = [{key:'tous', label:'Tout matériel'}].concat(
+    equipmentValues.map(key=>({key, label:EQUIPMENT_LABELS[key] || key}))
   );
 
   function renderFilters(){
-    document.getElementById('filterRow').innerHTML = filters.map(f=>
-      `<button type="button" class="filter-chip ${activeFilter===f.key?'active':''}" data-k="${f.key}">${f.label}</button>`
+    document.getElementById('filterRow').innerHTML = categoryFilters.map(f=>
+      `<button type="button" class="filter-chip ${activeCategory===f.key?'active':''}" data-k="${f.key}">${f.label}</button>`
     ).join('');
-    document.querySelectorAll('.filter-chip').forEach(chip=>{
-      chip.addEventListener('click', ()=>{ activeFilter = chip.dataset.k; renderFilters(); renderList(); });
+    document.querySelectorAll('#filterRow .filter-chip').forEach(chip=>{
+      chip.addEventListener('click', ()=>{ activeCategory = chip.dataset.k; renderFilters(); renderList(); });
+    });
+
+    document.getElementById('equipmentRow').innerHTML = equipmentFilters.map(f=>
+      `<button type="button" class="filter-chip ${activeEquipment===f.key?'active':''}" data-k="${f.key}">${f.label}</button>`
+    ).join('');
+    document.querySelectorAll('#equipmentRow .filter-chip').forEach(chip=>{
+      chip.addEventListener('click', ()=>{ activeEquipment = chip.dataset.k; renderFilters(); renderList(); });
     });
   }
 
   function renderList(){
-    const list = PROGRAMS.filter(p => activeFilter==='tous' || p.category===activeFilter);
+    const list = PROGRAMS.filter(p =>
+      (activeCategory==='tous' || p.category===activeCategory) &&
+      (activeEquipment==='tous' || p.equipment===activeEquipment)
+    );
     document.getElementById('progList').innerHTML = list.map(p=>`
       <a href="programme.html?id=${p.id}" class="prog-card">
         <div class="prog-top">
@@ -34,7 +49,7 @@
           <span>${EQUIPMENT_LABELS[p.equipment] || p.equipment}</span>
         </div>
       </a>
-    `).join('') || `<div class="empty-note">Aucun programme dans cette catégorie pour l'instant.</div>`;
+    `).join('') || `<div class="empty-note">Aucun programme ne correspond à ces filtres.</div>`;
   }
 
   renderFilters();
