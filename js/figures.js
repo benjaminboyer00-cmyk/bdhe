@@ -24,7 +24,9 @@ function renderPose(p){
   parts.push(tri(p.neck, p.rElbow, p.rHand));
   parts.push(tri(p.hip, p.lKnee, p.lFoot));
   parts.push(tri(p.hip, p.rKnee, p.rFoot));
-  const bells = Array.isArray(p.bell) ? p.bell : (p.bell ? [p.bell] : []);
+  // p.bell is either one [x,y] pair or a list of pairs [[x,y],[x,y]] — tell
+  // them apart by checking whether the first element is itself an array.
+  const bells = !p.bell ? [] : (Array.isArray(p.bell[0]) ? p.bell : [p.bell]);
   bells.forEach(b=> parts.push(bellGlyph(b)));
   return parts.join('');
 }
