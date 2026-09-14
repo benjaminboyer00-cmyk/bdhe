@@ -19,7 +19,7 @@
 
   function renderGender(){
     document.getElementById('genderControls').innerHTML = ['femme','homme'].map(g=>
-      `<div class="seg ${gender===g?'active':''}" data-g="${g}">${g==='femme'?'Femme':'Homme'}</div>`
+      `<button type="button" class="seg ${gender===g?'active':''}" data-g="${g}">${g==='femme'?'Femme':'Homme'}</button>`
     ).join('');
     document.querySelectorAll('.seg').forEach(s=>s.addEventListener('click',()=>{
       gender = s.dataset.g; renderGender(); persistAndRender();

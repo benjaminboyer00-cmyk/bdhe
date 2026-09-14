@@ -43,7 +43,7 @@
     levelSelect.value = bellLevelMap[store.profile.level] || 'beginner';
     function renderGender(){
       document.getElementById('genderControls').innerHTML = ['femme','homme'].map(g=>
-        `<div class="seg ${gender===g?'active':''}" data-g="${g}">${g==='femme'?'Femme':'Homme'}</div>`
+        `<button type="button" class="seg ${gender===g?'active':''}" data-g="${g}">${g==='femme'?'Femme':'Homme'}</button>`
       ).join('');
       document.querySelectorAll('.seg').forEach(s=>s.addEventListener('click',()=>{
         gender = s.dataset.g; updateProfile({gender}); renderGender(); updateBell();
@@ -64,6 +64,7 @@
         <div class="ex-body">
           <div class="ex-name">${ex.name}</div>
           <div class="ex-sub">${ex.mode==='time' ? (ex.reps ? ex.reps+' · '+ex.seconds+'s' : ex.seconds+'s') : ex.reps} — repos ${ex.rest}s</div>
+          ${ex.cue ? `<div class="ex-cue">${ex.cue}</div>` : ''}
         </div>
       </div>
     `).join('');

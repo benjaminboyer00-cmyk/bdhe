@@ -30,31 +30,75 @@
     }
   }
 
-  let stepIndex = 0;
-  let remaining = stepSeconds(steps[0]);
-  let elapsedTotal = 0;
-  let running = false;
-  let intervalId = null;
-  let finished = false;
-  const completedExercises = new Set();
-
   function stepSeconds(step){
     if(step.type==='work') return step.exercise.mode==='time' ? step.exercise.seconds : null;
     return step.seconds;
   }
 
+  // Resume in place if this exact session was already running
+  const existing = getActiveSession();
+  const resuming = !!(existing && existing.programId===prog.id && existing.sessionIndex===sIndex);
+
+  let stepIndex = resuming ? Math.min(existing.stepIndex, steps.length-1) : 0;
+  let elapsedTotal = resuming ? existing.elapsedTotal : 0;
+  // Countdown steps restart at full duration on resume — sub-step progress isn't persisted.
+  let remaining = stepSeconds(steps[stepIndex]);
+  let stepStartElapsed = elapsedTotal;
+  let running = false;
+  let intervalId = null;
+  let finished = false;
+  const completedExercises = new Set(resuming ? existing.completedExercises : []);
+
+  // --- Audio / haptic cues (unlocked on first tap, since the timer autostarts) ---
+  let audioCtx = null;
+  function ensureAudio(){
+    if(!audioCtx){ try{ audioCtx = new (window.AudioContext||window.webkitAudioContext)(); }catch(e){} }
+    if(audioCtx && audioCtx.state==='suspended') audioCtx.resume().catch(()=>{});
+  }
+  document.addEventListener('pointerdown', ensureAudio, {once:true});
+  function beep(freq, dur){
+    if(!audioCtx || audioCtx.state!=='running') return;
+    try{
+      const osc = audioCtx.createOscillator(), gain = audioCtx.createGain();
+      osc.type = 'sine'; osc.frequency.value = freq;
+      const t = audioCtx.currentTime;
+      gain.gain.setValueAtTime(0.0001, t);
+      gain.gain.exponentialRampToValueAtTime(0.25, t+0.01);
+      gain.gain.exponentialRampToValueAtTime(0.0001, t+dur);
+      osc.connect(gain); gain.connect(audioCtx.destination);
+      osc.start(t); osc.stop(t+dur+0.02);
+    }catch(e){}
+  }
+  function vibrate(pattern){ if(navigator.vibrate){ try{ navigator.vibrate(pattern); }catch(e){} } }
+  function cueCountdown(){ beep(440, 0.06); }
+  function cueTransition(){ beep(880, 0.16); vibrate(120); }
+
+  // --- Screen wake lock while the timer is running ---
+  let wakeLock = null;
+  async function acquireWakeLock(){
+    if(!('wakeLock' in navigator)) return;
+    try{ wakeLock = await navigator.wakeLock.request('screen'); }catch(e){}
+  }
+  function releaseWakeLock(){
+    if(wakeLock){ wakeLock.release().catch(()=>{}); wakeLock = null; }
+  }
+  document.addEventListener('visibilitychange', ()=>{
+    if(document.visibilityState==='visible' && running) acquireWakeLock();
+  });
+
   function persist(){
-    setActiveSession({programId:prog.id, sessionIndex:sIndex, stepIndex, elapsedTotal, startedAt:Date.now()});
+    setActiveSession({
+      programId:prog.id, sessionIndex:sIndex, stepIndex, elapsedTotal,
+      completedExercises:Array.from(completedExercises), startedAt:Date.now()
+    });
   }
 
   function tick(){
     elapsedTotal++;
     if(remaining !== null){
       remaining--;
-      if(remaining <= 0){
-        advance();
-        return;
-      }
+      if(remaining <= 0){ cueTransition(); advance(); return; }
+      if(remaining <= 3) cueCountdown();
     }
     renderTime();
   }
@@ -63,12 +107,14 @@
     if(intervalId) return;
     running = true;
     intervalId = setInterval(tick, 1000);
+    acquireWakeLock();
     render();
   }
   function pauseTimer(){
     running = false;
     clearInterval(intervalId);
     intervalId = null;
+    releaseWakeLock();
     render();
   }
 
@@ -111,7 +157,7 @@
     if(!timeEl) return;
     const cur = steps[stepIndex];
     if(cur.type==='work' && cur.exercise.mode==='reps'){
-      timeEl.textContent = fmtClock(elapsedStepTime(cur));
+      timeEl.textContent = fmtClock(elapsedStepTime());
     } else {
       timeEl.textContent = fmtClock(remaining);
     }
@@ -119,7 +165,6 @@
     if(bar) bar.style.width = `${Math.round((stepIndex/steps.length)*100)}%`;
   }
 
-  let stepStartElapsed = 0;
   function elapsedStepTime(){
     return elapsedTotal - stepStartElapsed;
   }
@@ -146,6 +191,7 @@
       (cur.type==='roundrest' ? 'Repos entre rounds' : 'Repos');
     const title = isWork ? ex.name : '—';
     const sub = isWork ? (ex.mode==='time' ? (ex.reps || '') : ex.reps) : (cur.nextLabel ? `Ensuite : ${cur.nextLabel}` : 'Dernière étape');
+    const cue = isWork && ex.cue ? `<div class="cue">${ex.cue}</div>` : '';
     const icon = isWork ? patternIcon(ex.pattern, PATTERNS[ex.pattern].color) : navIcon('mark');
 
     root.innerHTML = `
@@ -158,6 +204,7 @@
         <div class="ex-icon" style="margin:0 auto 10px;width:52px;height:52px;padding:10px;">${icon}</div>
         <h2>${title}</h2>
         <p>${sub}</p>
+        ${cue}
       </div>
       <div class="up-next">Étape ${stepIndex+1} / ${steps.length}</div>
       <div class="runner-controls" style="margin-bottom:14px;">

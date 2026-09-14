@@ -10,7 +10,7 @@
 
   function renderFilters(){
     document.getElementById('filterRow').innerHTML = filters.map(f=>
-      `<div class="filter-chip ${activeFilter===f.key?'active':''}" data-k="${f.key}">${f.label}</div>`
+      `<button type="button" class="filter-chip ${activeFilter===f.key?'active':''}" data-k="${f.key}">${f.label}</button>`
     ).join('');
     document.querySelectorAll('.filter-chip').forEach(chip=>{
       chip.addEventListener('click', ()=>{ activeFilter = chip.dataset.k; renderFilters(); renderList(); });

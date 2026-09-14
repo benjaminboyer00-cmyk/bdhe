@@ -53,13 +53,24 @@
   let qIndex = 0;
   const answers = {};
 
+  function avgOfNumbers(str){
+    const nums = (str.match(/\d+/g)||[]).map(Number);
+    return nums.length ? nums.reduce((a,b)=>a+b,0)/nums.length : null;
+  }
+
   function scoreProgram(p){
     let score = 0;
     if(answers.painArea==='dos' && p.id==='reeduc-dos') score += 100;
     if(answers.painArea==='genou' && p.id==='reeduc-genou') score += 100;
+    if(answers.painArea==='epaule' && p.id==='reeduc-epaule') score += 100;
     if(p.category === answers.goal) score += 40;
     if(answers.equipment==='les deux' || p.equipment==='les deux' || p.equipment===answers.equipment) score += 15;
     if(p.level==='tous' || p.level===answers.level) score += 10;
+    // Petits bonus de rapprochement pour départager les programmes à égalité sur l'objectif.
+    const progFreq = avgOfNumbers(p.freq);
+    if(progFreq!=null && answers.sessionsPerWeek) score += Math.max(0, 8 - Math.abs(progFreq - answers.sessionsPerWeek)*4);
+    const progDuration = avgOfNumbers(p.duration);
+    if(progDuration!=null && answers.sessionDuration) score += Math.max(0, 8 - Math.abs(progDuration - answers.sessionDuration)/5);
     return score;
   }
 

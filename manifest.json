@@ -1,0 +1,14 @@
+{
+  "name": "Ketel",
+  "short_name": "Ketel",
+  "description": "Programmes d'entraînement, questionnaire adaptatif, calculateurs et suivi de progression.",
+  "start_url": "index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#14171a",
+  "theme_color": "#14171a",
+  "lang": "fr",
+  "icons": [
+    {"src":"icons/icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any"}
+  ]
+}

@@ -58,7 +58,7 @@ details[open] summary::after{content:'\2013';}
 
 /* bell picker */
 .bell-controls{display:flex;gap:8px;margin:10px 0 12px;}
-.seg{flex:1;background:var(--surface-hi);border:1px solid var(--line);border-radius:6px;padding:8px;text-align:center;font-size:12px;color:var(--chalk-dim);cursor:pointer;}
+.seg{flex:1;background:var(--surface-hi);border:1px solid var(--line);border-radius:6px;padding:8px;text-align:center;font-size:12px;color:var(--chalk-dim);cursor:pointer;font-family:inherit;appearance:none;-webkit-appearance:none;}
 .seg.active{border-color:var(--brass);color:var(--chalk);background:rgba(201,146,47,0.12);}
 select,input[type="number"],input[type="text"]{width:100%;background:var(--surface-hi);border:1px solid var(--line);color:var(--chalk);
   padding:9px 10px;border-radius:6px;font-size:13px;margin-top:4px;font-family:inherit;}
@@ -149,7 +149,7 @@ label:first-child{margin-top:0;}
 .reco-flag{font-size:10.5px;font-weight:700;color:var(--bg);background:var(--brass);padding:3px 8px;border-radius:20px;}
 
 .filter-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px;}
-.filter-chip{font-size:12px;padding:6px 12px;border-radius:20px;background:var(--surface);border:1px solid var(--line);color:var(--chalk-dim);cursor:pointer;}
+.filter-chip{font-size:12px;padding:6px 12px;border-radius:20px;background:var(--surface);border:1px solid var(--line);color:var(--chalk-dim);cursor:pointer;font-family:inherit;appearance:none;-webkit-appearance:none;}
 .filter-chip.active{border-color:var(--brass);color:var(--chalk);background:rgba(201,146,47,.12);}
 
 /* quiz */
@@ -190,6 +190,8 @@ label:first-child{margin-top:0;}
 .exercise-focus .ex-icon{margin:0 auto 10px;width:52px;height:52px;padding:10px;}
 .exercise-focus h2{font-size:22px;margin:0 0 4px;}
 .exercise-focus p{font-size:13.5px;color:var(--chalk-dim);margin:0;}
+.exercise-focus .cue{font-size:12px;color:var(--chalk-dim);font-style:italic;margin-top:10px;line-height:1.5;}
+.ex-cue{font-size:11.5px;color:var(--chalk-dim);font-style:italic;margin-top:3px;}
 .up-next{font-size:12px;color:var(--chalk-dim);text-align:center;margin-bottom:16px;}
 .up-next b{color:var(--chalk);}
 .runner-controls{display:flex;gap:10px;}
@@ -199,4 +201,9 @@ label:first-child{margin-top:0;}
 
 @media (max-width:360px){
   .session-hero .big-time{font-size:44px;}
+}
+
+.filter-chip:focus-visible, .seg:focus-visible, .quiz-opt:focus-visible,
+.btn:focus-visible, .prog-card:focus-visible, summary:focus-visible{
+  outline:2px solid var(--brass); outline-offset:2px;
 }

@@ -1,5 +1,5 @@
 // Ketel — data model
-// Exercise block: {name, pattern, mode:'reps'|'time', reps?, seconds?, rest}
+// Exercise block: {name, pattern, mode:'reps'|'time', reps?, seconds?, rest, cue}
 // Session: {name, meta, rounds, restBetweenRounds, exercises:[block]}
 // Program: {id, title, category, equipment, level, duration, freq, tagline, description, color, tags:[], sessions:[session]}
 
@@ -54,12 +54,12 @@ const PROGRAMS = [
         meta:'<b>Séries avec repos.</b> Chaque mouvement : la série complète, puis repos, avant de passer au suivant.',
         rounds:1, restBetweenRounds:0,
         exercises:[
-          {name:'Deadlift', pattern:'HINGE', mode:'reps', reps:'3 × 10', rest:60},
-          {name:'Goblet Squat', pattern:'SQUAT', mode:'reps', reps:'3 × 10', rest:60},
-          {name:'Overhead Press', pattern:'PUSH', mode:'reps', reps:'3 × 8 / côté', rest:60},
-          {name:'Bent-Over Row', pattern:'PULL', mode:'reps', reps:'3 × 8 / côté', rest:60},
-          {name:"Farmer's March", pattern:'CARRY', mode:'reps', reps:'3 × 10 / côté', rest:60},
-          {name:'Halos', pattern:'ROTATION', mode:'reps', reps:'3 × 10 / sens', rest:90}
+          {name:'Deadlift', pattern:'HINGE', mode:'reps', reps:'3 × 10', rest:60, cue:'Dos plat, la charge part des hanches, pas du bas du dos.'},
+          {name:'Goblet Squat', pattern:'SQUAT', mode:'reps', reps:'3 × 10', rest:60, cue:'Coudes à l\'intérieur des genoux, talons au sol.'},
+          {name:'Overhead Press', pattern:'PUSH', mode:'reps', reps:'3 × 8 / côté', rest:60, cue:'Pousse jusqu\'au verrouillage, biceps près de l\'oreille.'},
+          {name:'Bent-Over Row', pattern:'PULL', mode:'reps', reps:'3 × 8 / côté', rest:60, cue:'Dos plat, tire le coude vers la hanche.'},
+          {name:"Farmer's March", pattern:'CARRY', mode:'reps', reps:'3 × 10 / côté', rest:60, cue:'Épaules basses, tronc gainé, pas de bascule du bassin.'},
+          {name:'Halos', pattern:'ROTATION', mode:'reps', reps:'3 × 10 / sens', rest:90, cue:'Le bell tourne autour de la tête, le tronc reste immobile.'}
         ]
       },
       {
@@ -67,12 +67,12 @@ const PROGRAMS = [
         meta:'<b>Rounds.</b> Les 6 mouvements s\'enchaînent, courte transition entre chaque. 4 rounds, repos long entre chaque round.',
         rounds:4, restBetweenRounds:150,
         exercises:[
-          {name:'Kettlebell Swing', pattern:'HINGE', mode:'reps', reps:'× 15', rest:20},
-          {name:'Offset Reverse Lunge', pattern:'SQUAT', mode:'reps', reps:'× 8 / côté', rest:20},
-          {name:'Lying Single-Arm Press', pattern:'PUSH', mode:'reps', reps:'× 8 / côté', rest:20},
-          {name:'Single-Arm Row', pattern:'PULL', mode:'reps', reps:'× 10 / côté', rest:20},
-          {name:'Rack Carry March', pattern:'CARRY', mode:'reps', reps:'× 10 / côté', rest:20},
-          {name:'Windmill', pattern:'ROTATION', mode:'reps', reps:'× 6 / côté', rest:20}
+          {name:'Kettlebell Swing', pattern:'HINGE', mode:'reps', reps:'× 15', rest:20, cue:'Explosion des hanches, pas un squat ni un lever de bras.'},
+          {name:'Offset Reverse Lunge', pattern:'SQUAT', mode:'reps', reps:'× 8 / côté', rest:20, cue:'Descends droit, genou avant aligné avec la cheville.'},
+          {name:'Lying Single-Arm Press', pattern:'PUSH', mode:'reps', reps:'× 8 / côté', rest:20, cue:'Allongé, stabilise l\'omoplate avant de pousser.'},
+          {name:'Single-Arm Row', pattern:'PULL', mode:'reps', reps:'× 10 / côté', rest:20, cue:'Dos plat, évite la rotation du tronc.'},
+          {name:'Rack Carry March', pattern:'CARRY', mode:'reps', reps:'× 10 / côté', rest:20, cue:'Coude collé aux côtes, poignet droit.'},
+          {name:'Windmill', pattern:'ROTATION', mode:'reps', reps:'× 6 / côté', rest:20, cue:'Regarde le bell, hanches qui pivotent, jambes quasi tendues.'}
         ]
       },
       {
@@ -80,12 +80,12 @@ const PROGRAMS = [
         meta:'<b>Every Minute On the Minute.</b> Les reps prescrites au top de chaque minute, repos sur le temps restant. 4 rounds, 1 min de repos entre les rounds.',
         rounds:4, restBetweenRounds:60,
         exercises:[
-          {name:'Romanian Deadlift', pattern:'HINGE', mode:'time', seconds:60, reps:'× 12', rest:0},
-          {name:'Goblet Squat', pattern:'SQUAT', mode:'time', seconds:60, reps:'× 10', rest:0},
-          {name:'Push-Ups', pattern:'PUSH', mode:'time', seconds:60, reps:'× 10', rest:0},
-          {name:'High Pull', pattern:'PULL', mode:'time', seconds:60, reps:'× 10 / côté', rest:0},
-          {name:'Uppercuts', pattern:'ROTATION', mode:'time', seconds:60, reps:'× 10 / côté', rest:0},
-          {name:'Overhead March', pattern:'CARRY', mode:'time', seconds:60, reps:'× 10 / côté', rest:0}
+          {name:'Romanian Deadlift', pattern:'HINGE', mode:'time', seconds:60, reps:'× 12', rest:0, cue:'Recule les hanches, genoux légèrement fléchis, dos plat.'},
+          {name:'Goblet Squat', pattern:'SQUAT', mode:'time', seconds:60, reps:'× 10', rest:0, cue:'Coudes à l\'intérieur des genoux, talons au sol.'},
+          {name:'Push-Ups', pattern:'PUSH', mode:'time', seconds:60, reps:'× 10', rest:0, cue:'Corps aligné de la tête aux talons, coudes à 45°.'},
+          {name:'High Pull', pattern:'PULL', mode:'time', seconds:60, reps:'× 10 / côté', rest:0, cue:'Coude qui part haut et large, pas d\'élan du dos.'},
+          {name:'Uppercuts', pattern:'ROTATION', mode:'time', seconds:60, reps:'× 10 / côté', rest:0, cue:'Rotation du tronc, pas juste le bras.'},
+          {name:'Overhead March', pattern:'CARRY', mode:'time', seconds:60, reps:'× 10 / côté', rest:0, cue:'Bras verrouillé, tronc gainé à chaque pas.'}
         ]
       }
     ]
@@ -108,11 +108,11 @@ const PROGRAMS = [
         meta:'<b>3 rounds.</b> Le circuit complet, puis repos avant de relancer.',
         rounds:3, restBetweenRounds:90,
         exercises:[
-          {name:'Pompes', pattern:'PUSH', mode:'reps', reps:'× 12', rest:45},
-          {name:'Squat', pattern:'SQUAT', mode:'reps', reps:'× 15', rest:45},
-          {name:'Rowing table basse', pattern:'PULL', mode:'reps', reps:'× 12', rest:45},
-          {name:'Hip Thrust', pattern:'HINGE', mode:'reps', reps:'× 15', rest:45},
-          {name:'Gainage planche', pattern:'CORE', mode:'time', seconds:30, rest:45}
+          {name:'Pompes', pattern:'PUSH', mode:'reps', reps:'× 12', rest:45, cue:'Corps aligné, coudes à 45°, descends jusqu\'à frôler le sol.'},
+          {name:'Squat', pattern:'SQUAT', mode:'reps', reps:'× 15', rest:45, cue:'Poids sur les talons, genoux dans l\'axe des pieds.'},
+          {name:'Rowing table basse', pattern:'PULL', mode:'reps', reps:'× 12', rest:45, cue:'Corps gainé, tire la poitrine vers la table.'},
+          {name:'Hip Thrust', pattern:'HINGE', mode:'reps', reps:'× 15', rest:45, cue:'Pousse par les talons, contracte les fessiers en haut.'},
+          {name:'Gainage planche', pattern:'CORE', mode:'time', seconds:30, rest:45, cue:'Corps aligné, ne laisse pas les hanches tomber.'}
         ]
       },
       {
@@ -120,11 +120,11 @@ const PROGRAMS = [
         meta:'<b>3 rounds.</b> Variante de la séance A, mêmes patrons, angles différents.',
         rounds:3, restBetweenRounds:90,
         exercises:[
-          {name:'Fentes alternées', pattern:'SQUAT', mode:'reps', reps:'× 10 / côté', rest:45},
-          {name:'Pompes déclinées', pattern:'PUSH', mode:'reps', reps:'× 10', rest:45},
-          {name:'Superman', pattern:'PULL', mode:'reps', reps:'× 12', rest:45},
-          {name:'Pont fessier unilatéral', pattern:'HINGE', mode:'reps', reps:'× 10 / côté', rest:45},
-          {name:'Gainage latéral', pattern:'CORE', mode:'time', seconds:20, rest:45}
+          {name:'Fentes alternées', pattern:'SQUAT', mode:'reps', reps:'× 10 / côté', rest:45, cue:'Descends droit, genou arrière proche du sol.'},
+          {name:'Pompes déclinées', pattern:'PUSH', mode:'reps', reps:'× 10', rest:45, cue:'Pieds surélevés, même alignement qu\'une pompe classique.'},
+          {name:'Superman', pattern:'PULL', mode:'reps', reps:'× 12', rest:45, cue:'Lève bras et jambes ensemble, sans forcer le bas du dos.'},
+          {name:'Pont fessier unilatéral', pattern:'HINGE', mode:'reps', reps:'× 10 / côté', rest:45, cue:'Bassin stable, évite de le faire pivoter.'},
+          {name:'Gainage latéral', pattern:'CORE', mode:'time', seconds:20, rest:45, cue:'Hanches hautes, corps aligné de la tête aux pieds.'}
         ]
       }
     ]
@@ -147,11 +147,11 @@ const PROGRAMS = [
         meta:'<b>40s d\'effort, 20s de repos.</b> 5 mouvements, 4 rounds, repos long entre rounds.',
         rounds:4, restBetweenRounds:90,
         exercises:[
-          {name:'Jumping Jacks', pattern:'CARDIO', mode:'time', seconds:40, rest:20},
-          {name:'Mountain Climbers', pattern:'CARDIO', mode:'time', seconds:40, rest:20},
-          {name:'Squat Jumps', pattern:'SQUAT', mode:'time', seconds:40, rest:20},
-          {name:'Burpees', pattern:'CARDIO', mode:'time', seconds:40, rest:20},
-          {name:'Plank Jacks', pattern:'CORE', mode:'time', seconds:40, rest:20}
+          {name:'Jumping Jacks', pattern:'CARDIO', mode:'time', seconds:40, rest:20, cue:'Rythme régulier, atterris souple sur les appuis.'},
+          {name:'Mountain Climbers', pattern:'CARDIO', mode:'time', seconds:40, rest:20, cue:'Bassin stable, genoux qui viennent sous la poitrine.'},
+          {name:'Squat Jumps', pattern:'SQUAT', mode:'time', seconds:40, rest:20, cue:'Réception souple, genoux dans l\'axe des pieds.'},
+          {name:'Burpees', pattern:'CARDIO', mode:'time', seconds:40, rest:20, cue:'Enchaîne à ton rythme, priorité à la technique sur la vitesse.'},
+          {name:'Plank Jacks', pattern:'CORE', mode:'time', seconds:40, rest:20, cue:'Gainage stable, seules les jambes bougent.'}
         ]
       },
       {
@@ -159,10 +159,10 @@ const PROGRAMS = [
         meta:'<b>45s d\'effort continu.</b> Rythme modéré et soutenu plutôt qu\'explosif. 3 rounds.',
         rounds:3, restBetweenRounds:60,
         exercises:[
-          {name:'High Knees', pattern:'CARDIO', mode:'time', seconds:45, rest:15},
-          {name:'Step-Ups', pattern:'CARDIO', mode:'time', seconds:45, rest:15},
-          {name:'Shadow Boxing', pattern:'CARDIO', mode:'time', seconds:45, rest:15},
-          {name:'Fentes sautées', pattern:'SQUAT', mode:'time', seconds:45, rest:15}
+          {name:'High Knees', pattern:'CARDIO', mode:'time', seconds:45, rest:15, cue:'Genoux hauts, buste droit, appuis légers.'},
+          {name:'Step-Ups', pattern:'CARDIO', mode:'time', seconds:45, rest:15, cue:'Pousse par le talon sur la marche, contrôle la descente.'},
+          {name:'Shadow Boxing', pattern:'CARDIO', mode:'time', seconds:45, rest:15, cue:'Genoux fléchis, tourne les hanches sur les coups.'},
+          {name:'Fentes sautées', pattern:'SQUAT', mode:'time', seconds:45, rest:15, cue:'Réception souple, change de jambe en l\'air.'}
         ]
       }
     ]
@@ -185,12 +185,12 @@ const PROGRAMS = [
         meta:'<b>6 mouvements, 35s / 15s.</b> 4 rounds, repos plus long tous les 2 rounds.',
         rounds:4, restBetweenRounds:90,
         exercises:[
-          {name:'KB Swing ou Squat sauté', pattern:'HINGE', mode:'time', seconds:35, rest:15},
-          {name:'Goblet Squat ou Air Squat', pattern:'SQUAT', mode:'time', seconds:35, rest:15},
-          {name:'Pompes', pattern:'PUSH', mode:'time', seconds:35, rest:15},
-          {name:'Row élastique ou serviette', pattern:'PULL', mode:'time', seconds:35, rest:15},
-          {name:'Mountain Climbers', pattern:'CARDIO', mode:'time', seconds:35, rest:15},
-          {name:'Gainage', pattern:'CORE', mode:'time', seconds:35, rest:30}
+          {name:'KB Swing ou Squat sauté', pattern:'HINGE', mode:'time', seconds:35, rest:15, cue:'Explosion des hanches, ou réception souple selon la variante.'},
+          {name:'Goblet Squat ou Air Squat', pattern:'SQUAT', mode:'time', seconds:35, rest:15, cue:'Coudes à l\'intérieur des genoux, talons au sol.'},
+          {name:'Pompes', pattern:'PUSH', mode:'time', seconds:35, rest:15, cue:'Corps aligné, adapte l\'amplitude si besoin.'},
+          {name:'Row élastique ou serviette', pattern:'PULL', mode:'time', seconds:35, rest:15, cue:'Dos plat, tire les coudes vers l\'arrière.'},
+          {name:'Mountain Climbers', pattern:'CARDIO', mode:'time', seconds:35, rest:15, cue:'Bassin stable, rythme soutenu mais contrôlé.'},
+          {name:'Gainage', pattern:'CORE', mode:'time', seconds:35, rest:30, cue:'Corps aligné, respire, ne bloque pas.'}
         ]
       }
     ]
@@ -213,12 +213,12 @@ const PROGRAMS = [
         meta:'<b>2 rounds, rythme lent.</b> Amplitude confortable, jamais de douleur pendant le mouvement.',
         rounds:2, restBetweenRounds:60,
         exercises:[
-          {name:'Cat-Cow', pattern:'MOBILITY', mode:'time', seconds:40, rest:15},
-          {name:'Bird-Dog', pattern:'CORE', mode:'reps', reps:'× 8 / côté', rest:20},
-          {name:'Dead Bug', pattern:'CORE', mode:'reps', reps:'× 8 / côté', rest:20},
-          {name:'Pont fessier', pattern:'HINGE', mode:'reps', reps:'× 12', rest:20},
-          {name:'Gainage McGill', pattern:'CORE', mode:'time', seconds:20, rest:30},
-          {name:'Bascule du bassin', pattern:'MOBILITY', mode:'time', seconds:30, rest:15}
+          {name:'Cat-Cow', pattern:'MOBILITY', mode:'time', seconds:40, rest:15, cue:'Mouvement lent, synchronise avec la respiration.'},
+          {name:'Bird-Dog', pattern:'CORE', mode:'reps', reps:'× 8 / côté', rest:20, cue:'Bascule minimale du bassin, mouvement lent et contrôlé.'},
+          {name:'Dead Bug', pattern:'CORE', mode:'reps', reps:'× 8 / côté', rest:20, cue:'Bas du dos plaqué au sol tout le mouvement.'},
+          {name:'Pont fessier', pattern:'HINGE', mode:'reps', reps:'× 12', rest:20, cue:'Pousse par les talons, pas de cambrure excessive.'},
+          {name:'Gainage McGill', pattern:'CORE', mode:'time', seconds:20, rest:30, cue:'Une main sous le bas du dos, contracte sans bouger.'},
+          {name:'Bascule du bassin', pattern:'MOBILITY', mode:'time', seconds:30, rest:15, cue:'Amplitude très réduite, sans forcer.'}
         ]
       }
     ]
@@ -241,11 +241,38 @@ const PROGRAMS = [
         meta:'<b>2 rounds.</b> Amplitude réduite si besoin, jamais de douleur aiguë.',
         rounds:2, restBetweenRounds:60,
         exercises:[
-          {name:'Quad Sets (contraction isométrique)', pattern:'CORE', mode:'reps', reps:'× 10 contractions de 5s', rest:15},
-          {name:'Élévation jambe tendue', pattern:'HINGE', mode:'reps', reps:'× 12 / côté', rest:20},
-          {name:'Chaise murale', pattern:'SQUAT', mode:'time', seconds:20, rest:30},
-          {name:'Clamshells', pattern:'ROTATION', mode:'reps', reps:'× 12 / côté', rest:20},
-          {name:'Step-up bas', pattern:'CARRY', mode:'reps', reps:'× 10 / côté', rest:20}
+          {name:'Quad Sets (contraction isométrique)', pattern:'CORE', mode:'reps', reps:'× 10 contractions de 5s', rest:15, cue:'Contracte le quadriceps, genou tendu, sans douleur.'},
+          {name:'Élévation jambe tendue', pattern:'HINGE', mode:'reps', reps:'× 12 / côté', rest:20, cue:'Genou verrouillé, lève sans plier.'},
+          {name:'Chaise murale', pattern:'SQUAT', mode:'time', seconds:20, rest:30, cue:'Genoux à 90° max si douleur, dos plaqué au mur.'},
+          {name:'Clamshells', pattern:'ROTATION', mode:'reps', reps:'× 12 / côté', rest:20, cue:'Bassin immobile, seul le genou s\'ouvre.'},
+          {name:'Step-up bas', pattern:'CARRY', mode:'reps', reps:'× 10 / côté', rest:20, cue:'Pousse par le talon, contrôle la descente.'}
+        ]
+      }
+    ]
+  },
+  {
+    id:'reeduc-epaule',
+    title:'Rééducation · Épaule',
+    category:'reeduc',
+    equipment:'aucun',
+    level:'tous',
+    duration:'15 min',
+    freq:'4-5×/sem',
+    tagline:'Mobilité douce et stabilité de l\'épaule, sans charge.',
+    description:'Séance de renforcement doux pour une épaule sensible : mobilité passive, rotation externe et stabilité scapulaire. En cas de douleur persistante ou aiguë, consulte un professionnel de santé avant de poursuivre.',
+    color:'var(--sage)',
+    tags:['reeduc','aucun','tous','epaule'],
+    sessions:[
+      {
+        name:'Mobilité & stabilité',
+        meta:'<b>2 rounds, rythme lent.</b> Amplitude confortable, jamais de douleur pendant le mouvement.',
+        rounds:2, restBetweenRounds:60,
+        exercises:[
+          {name:'Pendulum', pattern:'MOBILITY', mode:'time', seconds:30, rest:15, cue:'Laisse le bras pendre, mouvement passif du buste, pas d\'effort.'},
+          {name:'Rotation externe (élastique ou serviette)', pattern:'ROTATION', mode:'reps', reps:'× 12 / côté', rest:20, cue:'Coude collé aux côtes, seul l\'avant-bras tourne.'},
+          {name:'Rétraction scapulaire', pattern:'PULL', mode:'reps', reps:'× 12', rest:20, cue:'Rapproche les omoplates sans hausser les épaules.'},
+          {name:'Wall Slides', pattern:'MOBILITY', mode:'reps', reps:'× 10', rest:20, cue:'Dos et bras au mur, glisse lentement sans décoller.'},
+          {name:'Isométrie press au mur', pattern:'PUSH', mode:'time', seconds:15, rest:30, cue:'Pousse doucement, sans douleur, intensité progressive.'}
         ]
       }
     ]
