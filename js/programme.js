@@ -60,7 +60,7 @@
     const dur = Math.round(sessionDurationSec(session)/60);
     const exRows = session.exercises.map(ex=>`
       <div class="ex-card">
-        <div class="ex-icon">${exerciseFigureSvg(ex.name, PATTERNS[ex.pattern].color) || patternIcon(ex.pattern, PATTERNS[ex.pattern].color)}</div>
+        <div class="ex-icon${exercisePhotoUrl(ex.name)?' photo':''}">${exerciseMediaHtml(ex.name, ex.pattern, PATTERNS[ex.pattern].color)}</div>
         <div class="ex-body">
           <div class="ex-name">${ex.name}</div>
           <div class="ex-sub">${ex.mode==='time' ? (ex.reps ? ex.reps+' · '+ex.seconds+'s' : ex.seconds+'s') : ex.reps} — repos ${ex.rest}s</div>

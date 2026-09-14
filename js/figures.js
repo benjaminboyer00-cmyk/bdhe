@@ -35,6 +35,60 @@ function exerciseFigureSvg(name, color){
   return `<svg viewBox="0 0 100 100" fill="none" stroke="${color||'currentColor'}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">${renderPose(pose)}</svg>`;
 }
 
+// Real demonstration photos, from free-exercise-db (public domain / Unlicense):
+// https://github.com/yuhonas/free-exercise-db — used where a close enough
+// match exists for the exercise; every other exercise falls back to the
+// stick-figure pictogram above, then to the generic pattern icon.
+const EXERCISE_PHOTOS = {
+  "Bent-Over Row": "Bent_Over_Two-Dumbbell_Row",
+  "Dead Bug": "Dead_Bug",
+  "Deadlift": "Stiff-Legged_Dumbbell_Deadlift",
+  "Farmer's March": "Farmers_Walk",
+  "Fentes alternées": "Bodyweight_Walking_Lunge",
+  "Gainage": "Plank",
+  "Gainage planche": "Plank",
+  "Goblet Squat": "Goblet_Squat",
+  "Goblet Squat ou Air Squat": "Goblet_Squat",
+  "High Pull": "Kettlebell_Sumo_High_Pull",
+  "Hip Thrust": "Barbell_Hip_Thrust",
+  "Jumping Jacks": "Star_Jump",
+  "Kettlebell Swing": "One-Arm_Kettlebell_Swings",
+  "KB Swing ou Squat sauté": "One-Arm_Kettlebell_Swings",
+  "Mountain Climbers": "Mountain_Climbers",
+  "Offset Reverse Lunge": "Crossover_Reverse_Lunge",
+  "Overhead Press": "Dumbbell_Shoulder_Press",
+  "Pompes": "Push-Ups_-_Close_Triceps_Position",
+  "Pompes déclinées": "Decline_Push-Up",
+  "Push-Ups": "Push-Ups_-_Close_Triceps_Position",
+  "Pont fessier": "Butt_Lift_Bridge",
+  "Pont fessier unilatéral": "Single_Leg_Glute_Bridge",
+  "Romanian Deadlift": "Romanian_Deadlift",
+  "Rotation externe (élastique ou serviette)": "External_Rotation_with_Band",
+  "Row élastique ou serviette": "Inverted_Row",
+  "Rowing table basse": "Inverted_Row",
+  "Single-Arm Row": "One-Arm_Dumbbell_Row",
+  "Squat": "Bodyweight_Squat",
+  "Squat Jumps": "Freehand_Jump_Squat",
+  "Step-Ups": "Dumbbell_Step_Ups",
+  "Step-up bas": "Dumbbell_Step_Ups",
+  "Superman": "Superman",
+  "Windmill": "Kettlebell_Windmill",
+  "Élévation jambe tendue": "Flat_Bench_Lying_Leg_Raise"
+};
+
+function exercisePhotoUrl(name, frame){
+  const id = EXERCISE_PHOTOS[name];
+  if(!id) return null;
+  return `https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/${id}/${frame||0}.jpg`;
+}
+
+// Best available visual for an exercise: real photo > drawn pose > generic pattern icon.
+function exerciseMediaHtml(name, pattern, color){
+  const url = exercisePhotoUrl(name, 0);
+  if(url) return `<img src="${url}" alt="${name.replace(/"/g,'')}" loading="lazy">`;
+  return exerciseFigureSvg(name, color) || patternIcon(pattern, color);
+}
+
 const POSES = {
   // Standing upright, neutral arms
   STANDING: {

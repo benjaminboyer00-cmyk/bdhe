@@ -79,8 +79,15 @@ label:first-child{margin-top:0;}
 /* exercise cards */
 .ex-card{display:flex;gap:10px;align-items:flex-start;background:var(--surface);border:1px solid var(--line);
   border-radius:8px;padding:12px;margin-bottom:8px;}
-.ex-icon{width:40px;height:40px;flex:0 0 auto;background:var(--surface-hi);border:1px solid var(--line);border-radius:6px;padding:8px;}
+.ex-icon{width:56px;height:56px;flex:0 0 auto;background:var(--surface-hi);border:1px solid var(--line);border-radius:6px;padding:8px;
+  display:flex;align-items:center;justify-content:center;overflow:hidden;}
 .ex-icon svg{width:100%;height:100%;display:block;}
+.ex-icon img{width:100%;height:100%;object-fit:cover;border-radius:4px;}
+.ex-icon.photo{background:#eae6de;border-color:#eae6de;padding:0;}
+.ex-icon-lg{width:100%;max-width:220px;height:150px;margin:0 auto 12px;padding:10px;}
+.ex-icon-lg img{object-fit:contain;border-radius:6px;}
+.ex-icon-lg.photo{padding:6px;}
+.ex-icon-lg svg{width:110px;height:110px;margin:0 auto;}
 .ex-body{flex:1;min-width:0;}
 .ex-name{font-size:14.5px;font-weight:600;color:var(--chalk);}
 .ex-sub{font-size:12px;color:var(--chalk-dim);margin-top:2px;}
