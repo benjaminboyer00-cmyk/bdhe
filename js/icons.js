@@ -7,7 +7,9 @@ const NAV_ICONS = {
   quiz: `<rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1"/><path d="M8.5 12.5l2.2 2.2 4.3-4.4"/>`,
   calc: `<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8"/><path d="M8.5 12h.5M12 12h.5M15.5 12h.5M8.5 15.5h.5M12 15.5h.5M15.5 15.5h.5M8.5 19h.5M12 19h.5"/>`,
   progress: `<path d="M4 20V10"/><path d="M11 20V4"/><path d="M18 20v-7"/><path d="M3 20h18"/>`,
-  mark: `<circle cx="12" cy="14" r="7"/><path d="M9 7a3 3 0 0 1 6 0v3H9V7z"/>`
+  mark: `<circle cx="12" cy="14" r="7"/><path d="M9 7a3 3 0 0 1 6 0v3H9V7z"/>`,
+  sun: `<circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.6M12 18.9v2.6M4.6 4.6l1.9 1.9M17.5 17.5l1.9 1.9M2.5 12h2.6M18.9 12h2.6M4.6 19.4l1.9-1.9M17.5 6.5l1.9-1.9"/>`,
+  moon: `<path d="M20 14.3A8.4 8.4 0 1 1 9.7 4a6.9 6.9 0 0 0 10.3 10.3z"/>`
 };
 
 const PATTERN_ICONS = {

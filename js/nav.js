@@ -27,8 +27,38 @@ function renderBrandMark(){
   if(el) el.innerHTML = navIcon('mark');
 }
 
+function effectiveTheme(){
+  const explicit = document.documentElement.getAttribute('data-theme');
+  if(explicit) return explicit;
+  return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+}
+
+function renderThemeToggle(){
+  const top = document.querySelector('.top');
+  if(!top) return;
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'theme-toggle';
+  btn.setAttribute('aria-label', 'Changer de thème');
+  top.appendChild(btn);
+  const themeColorMeta = document.querySelector('meta[name="theme-color"]');
+  function paint(){
+    const theme = effectiveTheme();
+    btn.innerHTML = navIcon(theme==='light' ? 'moon' : 'sun');
+    if(themeColorMeta) themeColorMeta.setAttribute('content', theme==='light' ? '#f4f1ea' : '#14171a');
+  }
+  btn.addEventListener('click', ()=>{
+    const next = effectiveTheme()==='light' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', next);
+    try{ localStorage.setItem('ketel:theme', next); }catch(e){}
+    paint();
+  });
+  paint();
+}
+
 renderBottomNav();
 renderBrandMark();
+renderThemeToggle();
 
 if('serviceWorker' in navigator){
   window.addEventListener('load', ()=>{ navigator.serviceWorker.register('sw.js').catch(()=>{}); });
