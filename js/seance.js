@@ -192,7 +192,7 @@
     const title = isWork ? ex.name : '—';
     const sub = isWork ? (ex.mode==='time' ? (ex.reps || '') : ex.reps) : (cur.nextLabel ? `Ensuite : ${cur.nextLabel}` : 'Dernière étape');
     const cue = isWork && ex.cue ? `<div class="cue">${ex.cue}</div>` : '';
-    const icon = isWork ? patternIcon(ex.pattern, PATTERNS[ex.pattern].color) : navIcon('mark');
+    const icon = isWork ? (exerciseFigureSvg(ex.name, PATTERNS[ex.pattern].color) || patternIcon(ex.pattern, PATTERNS[ex.pattern].color)) : navIcon('mark');
 
     root.innerHTML = `
       <div class="progress-bar"><i id="progFill" style="width:${Math.round((stepIndex/steps.length)*100)}%"></i></div>

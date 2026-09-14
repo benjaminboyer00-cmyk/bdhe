@@ -1,10 +1,10 @@
 // Ketel — service worker: app shell cached for offline use, stale-while-revalidate.
-const CACHE = 'ketel-v1';
+const CACHE = 'ketel-v2';
 const ASSETS = [
   'index.html','programmes.html','programme.html','seance.html',
   'questionnaire.html','calculateurs.html','progression.html',
   'css/style.css',
-  'js/icons.js','js/store.js','js/util.js','js/nav.js',
+  'js/icons.js','js/figures.js','js/store.js','js/util.js','js/nav.js',
   'js/dashboard.js','js/programmes.js','js/programme.js','js/seance.js',
   'js/quiz.js','js/calculators.js','js/progression.js',
   'data/programs.js','manifest.json','icons/icon.svg'
