@@ -32,7 +32,8 @@
       options:[
         {v:'kettlebell', label:'Kettlebell', sub:''},
         {v:'aucun', label:'Aucun matériel', sub:'Poids du corps uniquement'},
-        {v:'les deux', label:'Les deux', sub:''}
+        {v:'salle', label:'Salle de sport', sub:'Barres, haltères, machines'},
+        {v:'les deux', label:'Kettlebell ou poids du corps', sub:''}
       ]
     },
     {
@@ -64,7 +65,10 @@
     if(answers.painArea==='genou' && p.id==='reeduc-genou') score += 100;
     if(answers.painArea==='epaule' && p.id==='reeduc-epaule') score += 100;
     if(p.category === answers.goal) score += 40;
-    if(answers.equipment==='les deux' || p.equipment==='les deux' || p.equipment===answers.equipment) score += 15;
+    const equipMatch = p.equipment===answers.equipment
+      || (answers.equipment==='les deux' && (p.equipment==='kettlebell' || p.equipment==='aucun'))
+      || p.equipment==='les deux';
+    if(equipMatch) score += 15;
     if(p.level==='tous' || p.level===answers.level) score += 10;
     // Petits bonus de rapprochement pour départager les programmes à égalité sur l'objectif.
     const progFreq = avgOfNumbers(p.freq);

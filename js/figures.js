@@ -73,7 +73,37 @@ const EXERCISE_PHOTOS = {
   "Step-up bas": "Dumbbell_Step_Ups",
   "Superman": "Superman",
   "Windmill": "Kettlebell_Windmill",
-  "Élévation jambe tendue": "Flat_Bench_Lying_Leg_Raise"
+  "Élévation jambe tendue": "Flat_Bench_Lying_Leg_Raise",
+  "Fentes sautées": "Split_Jump",
+  "Gainage latéral": "Side_Bridge",
+  "Bascule du bassin": "Pelvic_Tilt_Into_Bridge",
+  "Rack Carry March": "Farmers_Walk",
+  "Plank Jacks": "Plank",
+  "Chaise murale": "Bodyweight_Squat",
+  "Rétraction scapulaire": "Scapular_Pull-Up",
+  // Salle de sport
+  "Développé couché": "Barbell_Bench_Press_-_Medium_Grip",
+  "Développé incliné haltères": "Incline_Dumbbell_Press",
+  "Développé militaire": "Standing_Military_Press",
+  "Élévations latérales": "Side_Lateral_Raise",
+  "Dips": "Dips_-_Triceps_Version",
+  "Extension triceps à la poulie": "Triceps_Pushdown",
+  "Squat barre": "Barbell_Squat",
+  "Presse à cuisses": "Leg_Press",
+  "Fentes marchées barre": "Barbell_Walking_Lunge",
+  "Extension quadriceps": "Leg_Extensions",
+  "Mollets debout": "Standing_Barbell_Calf_Raise",
+  "Tirage vertical": "Wide-Grip_Lat_Pulldown",
+  "Rowing barre": "Bent_Over_Barbell_Row",
+  "Rowing haltère unilatéral": "One-Arm_Dumbbell_Row",
+  "Face Pull": "Face_Pull",
+  "Curl biceps barre": "Barbell_Curl",
+  "Gainage rotation": "Russian_Twist",
+  "Soulevé de terre": "Barbell_Deadlift",
+  "Soulevé de terre roumain": "Romanian_Deadlift",
+  "Leg curl allongé": "Lying_Leg_Curls",
+  "Hip thrust barre": "Barbell_Hip_Thrust",
+  "Extensions lombaires": "Hyperextensions_Back_Extensions"
 };
 
 function exercisePhotoUrl(name, frame){

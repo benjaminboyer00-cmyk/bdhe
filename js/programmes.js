@@ -31,7 +31,7 @@
         <div class="prog-desc">${p.tagline}</div>
         <div class="prog-meta">
           <span>${p.duration}</span><span>${p.freq}</span><span>${LEVELS[p.level]}</span>
-          <span>${p.equipment==='aucun'?'Sans matériel':p.equipment==='kettlebell'?'Kettlebell':'Kettlebell ou sans matériel'}</span>
+          <span>${EQUIPMENT_LABELS[p.equipment] || p.equipment}</span>
         </div>
       </a>
     `).join('') || `<div class="empty-note">Aucun programme dans cette catégorie pour l'instant.</div>`;

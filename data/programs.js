@@ -29,6 +29,13 @@ const LEVELS = {
   tous: 'Tous niveaux'
 };
 
+const EQUIPMENT_LABELS = {
+  aucun: 'Sans matériel',
+  kettlebell: 'Kettlebell',
+  'les deux': 'Kettlebell ou sans matériel',
+  salle: 'Salle de sport'
+};
+
 const BELL_TABLE = {
   beginner:     {femme:'6 – 10 kg', homme:'12 – 16 kg'},
   intermediate: {femme:'10 – 16 kg', homme:'16 – 20 kg'},
@@ -273,6 +280,73 @@ const PROGRAMS = [
           {name:'Rétraction scapulaire', pattern:'PULL', mode:'reps', reps:'× 12', rest:20, cue:'Rapproche les omoplates sans hausser les épaules.'},
           {name:'Wall Slides', pattern:'MOBILITY', mode:'reps', reps:'× 10', rest:20, cue:'Dos et bras au mur, glisse lentement sans décoller.'},
           {name:'Isométrie press au mur', pattern:'PUSH', mode:'time', seconds:15, rest:30, cue:'Pousse doucement, sans douleur, intensité progressive.'}
+        ]
+      }
+    ]
+  },
+  {
+    id:'salle-upper-lower',
+    title:'Musculation en Salle · Upper/Lower',
+    category:'force',
+    equipment:'salle',
+    level:'intermediaire',
+    duration:'50 min',
+    freq:'4×/sem',
+    tagline:'Split haut/bas classique. Barre, haltères et machines.',
+    description:'Le format historique de la salle : deux séances haut du corps (dont le développé couché) et deux séances bas du corps, à alterner sur la semaine pour progresser en charge sur les mouvements de base.',
+    color:'var(--plum)',
+    tags:['force','salle','intermediaire'],
+    sessions:[
+      {
+        name:'Haut du corps · Poussée',
+        meta:'<b>Séries classiques.</b> Charge lourde et repos complet sur les mouvements composés, plus léger sur les isolations.',
+        rounds:1, restBetweenRounds:0,
+        exercises:[
+          {name:'Développé couché', pattern:'PUSH', mode:'reps', reps:'4 × 8', rest:120, cue:'Omoplates serrées, barre qui touche la poitrine sans rebond.'},
+          {name:'Développé incliné haltères', pattern:'PUSH', mode:'reps', reps:'3 × 10', rest:90, cue:'Banc à 30-45°, coudes sous les haltères.'},
+          {name:'Développé militaire', pattern:'PUSH', mode:'reps', reps:'3 × 8', rest:90, cue:'Gainage serré, pousse la barre en ligne droite au-dessus de la tête.'},
+          {name:'Élévations latérales', pattern:'PUSH', mode:'reps', reps:'3 × 12', rest:60, cue:'Coudes légèrement fléchis, lève jusqu\'à l\'horizontale, pas plus haut.'},
+          {name:'Dips', pattern:'PUSH', mode:'reps', reps:'3 × 10', rest:60, cue:'Buste penché en avant, descends jusqu\'à un angle de coude confortable.'},
+          {name:'Extension triceps à la poulie', pattern:'PUSH', mode:'reps', reps:'3 × 12', rest:60, cue:'Coudes fixes collés au corps, seul l\'avant-bras bouge.'}
+        ]
+      },
+      {
+        name:'Bas du corps · Quadriceps',
+        meta:'<b>Séries classiques.</b> Priorité à la technique avant d\'augmenter les charges.',
+        rounds:1, restBetweenRounds:0,
+        exercises:[
+          {name:'Squat barre', pattern:'SQUAT', mode:'reps', reps:'4 × 6', rest:150, cue:'Poids sur les talons, descends jusqu\'à ce que les hanches passent sous les genoux.'},
+          {name:'Presse à cuisses', pattern:'SQUAT', mode:'reps', reps:'3 × 10', rest:120, cue:'Bas du dos plaqué au dossier, ne verrouille pas complètement les genoux.'},
+          {name:'Fentes marchées barre', pattern:'SQUAT', mode:'reps', reps:'3 × 10 / côté', rest:90, cue:'Descends droit, genou avant aligné avec la cheville.'},
+          {name:'Extension quadriceps', pattern:'SQUAT', mode:'reps', reps:'3 × 12', rest:60, cue:'Mouvement contrôlé, marque une pause en haut.'},
+          {name:'Mollets debout', pattern:'SQUAT', mode:'reps', reps:'4 × 15', rest:45, cue:'Amplitude complète, monte sur la pointe des pieds.'},
+          {name:'Gainage', pattern:'CORE', mode:'time', seconds:40, rest:45, cue:'Corps aligné, ne laisse pas les hanches tomber.'}
+        ]
+      },
+      {
+        name:'Haut du corps · Tirage',
+        meta:'<b>Séries classiques.</b> Charge lourde et repos complet sur les mouvements composés, plus léger sur les isolations.',
+        rounds:1, restBetweenRounds:0,
+        exercises:[
+          {name:'Tirage vertical', pattern:'PULL', mode:'reps', reps:'4 × 8', rest:120, cue:'Tire la barre vers le haut de la poitrine, sans te pencher en arrière.'},
+          {name:'Rowing barre', pattern:'PULL', mode:'reps', reps:'3 × 10', rest:90, cue:'Dos plat, tire la barre vers le nombril.'},
+          {name:'Rowing haltère unilatéral', pattern:'PULL', mode:'reps', reps:'3 × 10 / côté', rest:75, cue:'Dos plat, évite la rotation du tronc.'},
+          {name:'Face Pull', pattern:'PULL', mode:'reps', reps:'3 × 15', rest:60, cue:'Tire vers le visage, coudes hauts, serre les omoplates.'},
+          {name:'Curl biceps barre', pattern:'PULL', mode:'reps', reps:'3 × 10', rest:60, cue:'Coudes fixes le long du corps, pas d\'élan.'},
+          {name:'Gainage rotation', pattern:'ROTATION', mode:'reps', reps:'3 × 16', rest:45, cue:'Rotation contrôlée du tronc, pas seulement des bras.'}
+        ]
+      },
+      {
+        name:'Bas du corps · Postérieur',
+        meta:'<b>Séries classiques.</b> Priorité à la technique avant d\'augmenter les charges.',
+        rounds:1, restBetweenRounds:0,
+        exercises:[
+          {name:'Soulevé de terre', pattern:'HINGE', mode:'reps', reps:'4 × 6', rest:150, cue:'Dos plat, la barre reste proche des jambes tout du long.'},
+          {name:'Soulevé de terre roumain', pattern:'HINGE', mode:'reps', reps:'3 × 10', rest:120, cue:'Recule les hanches, genoux légèrement fléchis, dos plat.'},
+          {name:'Leg curl allongé', pattern:'HINGE', mode:'reps', reps:'3 × 12', rest:75, cue:'Mouvement contrôlé, ne cambre pas le bas du dos.'},
+          {name:'Hip thrust barre', pattern:'HINGE', mode:'reps', reps:'3 × 10', rest:90, cue:'Pousse par les talons, contracte les fessiers en haut.'},
+          {name:'Extensions lombaires', pattern:'HINGE', mode:'reps', reps:'3 × 12', rest:60, cue:'Amplitude modérée, pas d\'hyperextension du bas du dos.'},
+          {name:'Gainage', pattern:'CORE', mode:'time', seconds:40, rest:45, cue:'Corps aligné, ne laisse pas les hanches tomber.'}
         ]
       }
     ]
