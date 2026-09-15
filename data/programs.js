@@ -36,6 +36,15 @@ const EQUIPMENT_LABELS = {
   salle: 'Salle de sport'
 };
 
+// Associe une zone de douleur du questionnaire à son programme de rééducation dédié.
+const PAIN_PROGRAM_MAP = {
+  dos: 'reeduc-dos',
+  genou: 'reeduc-genou',
+  epaule: 'reeduc-epaule',
+  poignet: 'reeduc-poignet',
+  cou: 'reeduc-cou'
+};
+
 const BELL_TABLE = {
   beginner:     {femme:'6 – 10 kg', homme:'12 – 16 kg'},
   intermediate: {femme:'10 – 16 kg', homme:'16 – 20 kg'},
@@ -49,6 +58,7 @@ const PROGRAMS = [
     category:'force',
     equipment:'kettlebell',
     level:'tous',
+    split:'fullbody',
     duration:'30 min',
     freq:'3×/sem',
     tagline:'Un bell. Trois séances par semaine. Six mouvements fondamentaux, toujours.',
@@ -103,6 +113,7 @@ const PROGRAMS = [
     category:'force',
     equipment:'aucun',
     level:'debutant',
+    split:'fullbody',
     duration:'25 min',
     freq:'3×/sem',
     tagline:'Aucun matériel requis. Deux séances en alternance, tout le corps.',
@@ -142,6 +153,7 @@ const PROGRAMS = [
     category:'endurance',
     equipment:'aucun',
     level:'tous',
+    split:'na',
     duration:'20 min',
     freq:'2-3×/sem',
     tagline:'Intervalles courts, sans matériel, pour construire le souffle.',
@@ -180,6 +192,7 @@ const PROGRAMS = [
     category:'poids',
     equipment:'les deux',
     level:'tous',
+    split:'fullbody',
     duration:'35 min',
     freq:'3-4×/sem',
     tagline:'Haute densité, repos courts. Kettlebell ou poids du corps.',
@@ -208,6 +221,7 @@ const PROGRAMS = [
     category:'reeduc',
     equipment:'aucun',
     level:'tous',
+    split:'na',
     duration:'20 min',
     freq:'4-5×/sem',
     tagline:'Mobilité douce et stabilité du tronc, sans charge.',
@@ -236,6 +250,7 @@ const PROGRAMS = [
     category:'reeduc',
     equipment:'aucun',
     level:'tous',
+    split:'na',
     duration:'18 min',
     freq:'4-5×/sem',
     tagline:'Renforcement progressif autour du genou, faible impact.',
@@ -263,6 +278,7 @@ const PROGRAMS = [
     category:'reeduc',
     equipment:'aucun',
     level:'tous',
+    split:'na',
     duration:'15 min',
     freq:'4-5×/sem',
     tagline:'Mobilité douce et stabilité de l\'épaule, sans charge.',
@@ -290,6 +306,7 @@ const PROGRAMS = [
     category:'force',
     equipment:'salle',
     level:'intermediaire',
+    split:'split',
     duration:'50 min',
     freq:'4×/sem',
     tagline:'Split haut/bas classique. Barre, haltères et machines.',
@@ -357,6 +374,7 @@ const PROGRAMS = [
     category:'force',
     equipment:'salle',
     level:'debutant',
+    split:'fullbody',
     duration:'45 min',
     freq:'3×/sem',
     tagline:'Trois séances tout le corps, l\'entrée en salle la plus simple à suivre.',
@@ -398,6 +416,63 @@ const PROGRAMS = [
           {name:'Rowing haltère unilatéral', pattern:'PULL', mode:'reps', reps:'3 × 10 / côté', rest:75, cue:'Dos plat, évite la rotation du tronc.'},
           {name:'Extension quadriceps', pattern:'SQUAT', mode:'reps', reps:'3 × 12', rest:60, cue:'Mouvement contrôlé, marque une pause en haut.'},
           {name:'Curl biceps barre', pattern:'PULL', mode:'reps', reps:'3 × 10', rest:60, cue:'Coudes fixes le long du corps, pas d\'élan.'}
+        ]
+      }
+    ]
+  },
+  {
+    id:'reeduc-poignet',
+    title:'Rééducation · Poignet',
+    category:'reeduc',
+    equipment:'aucun',
+    level:'tous',
+    split:'na',
+    duration:'12 min',
+    freq:'4-5×/sem',
+    tagline:'Mobilité douce et renforcement progressif du poignet, sans charge.',
+    description:'Séance de renforcement doux pour un poignet sensible (souvent lié au développé couché, aux pompes ou au travail de bureau) : mobilité, renforcement des fléchisseurs/extenseurs et de la préhension. En cas de douleur persistante ou aiguë, consulte un professionnel de santé avant de poursuivre.',
+    color:'var(--sage)',
+    tags:['reeduc','aucun','tous','poignet'],
+    sessions:[
+      {
+        name:'Mobilité & renforcement',
+        meta:'<b>2 rounds, rythme lent.</b> Amplitude confortable, jamais de douleur pendant le mouvement.',
+        rounds:2, restBetweenRounds:45,
+        exercises:[
+          {name:'Rotations du poignet', pattern:'MOBILITY', mode:'time', seconds:30, rest:15, cue:'Rotation lente dans chaque sens, amplitude confortable.'},
+          {name:'Flexion/extension du poignet (élastique)', pattern:'MOBILITY', mode:'reps', reps:'× 12 / sens', rest:20, cue:'Avant-bras posé et stable, seul le poignet bouge.'},
+          {name:'Prono-supination (léger poids)', pattern:'ROTATION', mode:'reps', reps:'× 10 / côté', rest:20, cue:'Coude fixe à 90°, tourne lentement paume vers le haut puis vers le bas.'},
+          {name:'Serrage de balle (grip)', pattern:'CORE', mode:'reps', reps:'× 12 / côté', rest:20, cue:'Serre 2 secondes, relâche complètement entre chaque répétition.'},
+          {name:'Étirement fléchisseurs/extenseurs', pattern:'MOBILITY', mode:'time', seconds:20, rest:15, cue:'Bras tendu, tire doucement les doigts vers soi puis vers le bas, sans forcer.'}
+        ]
+      }
+    ]
+  },
+  {
+    id:'reeduc-cou',
+    title:'Rééducation · Cou & cervicales',
+    category:'reeduc',
+    equipment:'aucun',
+    level:'tous',
+    split:'na',
+    duration:'12 min',
+    freq:'4-5×/sem',
+    tagline:'Mobilité douce et renforcement isométrique léger du cou.',
+    description:'Séance de renforcement doux pour des cervicales sensibles (souvent liées à la posture ou au travail de bureau) : mobilité en douceur et isométrie légère pour renforcer sans comprimer. En cas de douleur persistante, de vertiges, d\'engourdissement ou de douleur irradiant dans le bras, consulte un professionnel de santé avant de poursuivre.',
+    color:'var(--sage)',
+    tags:['reeduc','aucun','tous','cou'],
+    sessions:[
+      {
+        name:'Mobilité & isométrie',
+        meta:'<b>2 rounds, rythme lent.</b> Amplitude confortable, jamais de douleur pendant le mouvement.',
+        rounds:2, restBetweenRounds:45,
+        exercises:[
+          {name:'Rétraction du menton (chin tuck)', pattern:'MOBILITY', mode:'reps', reps:'× 10', rest:20, cue:'Recule le menton comme pour faire un double menton, regard horizontal.'},
+          {name:'Rotation cervicale douce', pattern:'MOBILITY', mode:'time', seconds:30, rest:15, cue:'Tourne la tête lentement d\'un côté puis l\'autre, amplitude confortable.'},
+          {name:'Inclinaison latérale douce', pattern:'MOBILITY', mode:'time', seconds:30, rest:15, cue:'Oreille vers l\'épaule, sans forcer, épaules basses.'},
+          {name:'Isométrie latérale (main contre tempe)', pattern:'CORE', mode:'time', seconds:10, rest:20, cue:'Pousse doucement la tête contre la main sans bouger, intensité légère.'},
+          {name:'Isométrie avant/arrière (main contre front/nuque)', pattern:'CORE', mode:'time', seconds:10, rest:20, cue:'Pousse doucement sans bouger la tête, intensité légère et progressive.'},
+          {name:'Étirement du trapèze', pattern:'MOBILITY', mode:'time', seconds:20, rest:15, cue:'Oreille vers l\'épaule, main opposée guide doucement, sans tirer fort.'}
         ]
       }
     ]

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <script>try{var t=localStorage.getItem("ketel:theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
-<title>Ketel · Questionnaire</title>
+<title>Ketel · Bibliothèque d'exercices</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
@@ -19,10 +19,13 @@
 
   <div class="top">
     <div class="brand"><span class="mark" id="brandMark"></span><span>Ketel</span></div>
-    <h1 style="font-size:22px;">Trouve ton programme</h1>
+    <h1>Bibliothèque</h1>
+    <p>Tous les exercices, par groupe musculaire — technique et justification scientifique.</p>
   </div>
 
-  <div id="quizRoot"></div>
+  <div class="filter-row" id="muscleRow"></div>
+  <div class="filter-row" id="equipRow"></div>
+  <div id="libList"></div>
 
 </div>
 
@@ -34,6 +37,6 @@
 <script src="js/store.js"></script>
 <script src="js/util.js"></script>
 <script src="js/nav.js"></script>
-<script src="js/quiz.js"></script>
+<script src="js/bibliotheque.js"></script>
 </body>
 </html>

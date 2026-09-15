@@ -2,6 +2,7 @@
 const NAV_ITEMS = [
   {key:'home', href:'index.html', label:'Accueil', pages:['index.html','']},
   {key:'programs', href:'programmes.html', label:'Programmes', pages:['programmes.html','programme.html','seance.html']},
+  {key:'library', href:'bibliotheque.html', label:'Exercices', pages:['bibliotheque.html']},
   {key:'quiz', href:'questionnaire.html', label:'Questionnaire', pages:['questionnaire.html']},
   {key:'calc', href:'calculateurs.html', label:'Calculs', pages:['calculateurs.html']},
   {key:'progress', href:'progression.html', label:'Progression', pages:['progression.html']}

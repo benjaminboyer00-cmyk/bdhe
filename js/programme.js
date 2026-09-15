@@ -63,6 +63,7 @@
     const dur = Math.round(sessionDurationSec(session)/60);
     const exRows = session.exercises.map(ex=>{
       const lastWeight = (tracksLoad && ex.mode==='reps') ? getLoad(ex.name) : null;
+      const info = typeof exerciseInfo === 'function' ? exerciseInfo(ex.name) : null;
       return `
       <div class="ex-card">
         <div class="ex-icon${exercisePhotoUrl(ex.name)?' photo':''}">${exerciseMediaHtml(ex.name, ex.pattern, PATTERNS[ex.pattern].color)}</div>
@@ -70,6 +71,10 @@
           <div class="ex-name">${ex.name}</div>
           <div class="ex-sub">${ex.mode==='time' ? (ex.reps ? ex.reps+' · '+ex.seconds+'s' : ex.seconds+'s') : ex.reps} — repos ${ex.rest}s${lastWeight!=null ? ` · dernière charge ${lastWeight} kg` : ''}</div>
           ${ex.cue ? `<div class="ex-cue">${ex.cue}</div>` : ''}
+          ${info && info.why ? `
+            <span class="ex-why-toggle" data-why-toggle>Pourquoi cet exercice ?</span>
+            <div class="ex-why"><b>Pourquoi cet exercice ?</b> ${info.why}${info.source ? `<span class="ex-source">Source : ${info.source}</span>` : ''}</div>
+          ` : ''}
         </div>
       </div>
     `;}).join('');
@@ -83,4 +88,10 @@
         </div>
       </details>`;
   }).join('');
+
+  document.querySelectorAll('[data-why-toggle]').forEach(toggle=>{
+    toggle.addEventListener('click', ()=>{
+      toggle.nextElementSibling.classList.toggle('open');
+    });
+  });
 })();
